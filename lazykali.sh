@@ -10,7 +10,7 @@
 #
 ##############################################
 clear
-version="20130519"
+version="20170206"
 #some variables
 DEFAULT_ROUTE=$(ip route show default | awk '/default/ {print $3}')
 IFACE=$(ip route show | awk '(NR == 2) {print $3}')
@@ -47,8 +47,8 @@ fi
 if [[ "$silent" = "1" ]];then
         echo "Not checking for a new version : silent mode."
 else
-        changelog=$(curl --silent -q http://yourgeekonthego.com/scripts/lazykali/changelog)
-        last_version=$(curl --silent -q http://yourgeekonthego.com/scripts/lazykali/version) #store last version number to variable
+        changelog=$(curl --silent -q https://raw.githubusercontent.com/SmugZombie/lazykali/master/changelog)
+        last_version=$(curl --silent -q https://raw.githubusercontent.com/SmugZombie/lazykali/master/version) #store last version number to variable
         if [[ $last_version > $version ]];then # Comparing to current version
                 echo -e "You are running version \033[31m$version\033[m, do you want to update to \033[32m$last_version\033[m? (Y/N)
 Last changes are :
@@ -56,7 +56,7 @@ $changelog"
                 read update
                 if [[ $update = Y || $update = y ]];then
                         echo "[+] Updating script..."
-                        wget -q http://yourgeekonthego.com/scripts/lazykali/lazykali.sh -O $0
+                        wget -q https://raw.githubusercontent.com/SmugZombie/lazykali/master/lazykali.sh -O $0
                         chmod +x $0
                         echo "[-] Script updated !"
                         if [[ $0 != '/usr/bin/yamas' && $ask_for_install = 'y' ]];then
@@ -121,6 +121,9 @@ http://code.google.com/p/simple-ducky-payload-generator/
 
 0sm0s1z for Subterfuge
 http://code.google.com/p/subterfuge/
+
+smugzombie for Rehosting
+https://github.com/smugzombie
 
 and anyone else I may have missed.
 
